@@ -14,7 +14,7 @@ const musicInfo = document.getElementById('musicInfo');
 function retreivemusicfiles() {
     const musicList = [];
 
-    fetch('./music/')
+    fetch('music/')
         .then((response) => response.text())
         .then((html) => {
             const parser = new DOMParser();
