@@ -1,1 +1,82 @@
-Hello World.
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lo-fi Music Oasis</title>
+    <!-- Inclure jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Inclure jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+    <!-- Include the Bootstrap Icons library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <!-- Add your CSS styles and necessary scripts here -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar hidden">
+            <div class="close-button">
+                <i class="bi bi-x-circle-fill" onclick="hideSidebar()"></i>
+            </div>
+            <!-- Enhance relaxation with checkboxes for ambient sounds -->
+            <div class="music-controls">
+                <div class="music-buttons">
+                    <button id="previousButton" onclick="previousMusic()">
+                        <i class="bi bi-skip-backward"></i>
+                    </button>
+                    <button id="restartButton" onclick="restartMusic()">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                    </button>
+                    <button id="playButton" onclick="togglePlay()">
+                        <i class="bi bi-play"></i>
+                    </button>
+                    <button id="skipButton" onclick="skipMusic()">
+                        <i class="bi bi-skip-forward"></i>
+                    </button>
+                </div>
+                <div id="player">
+                    <h4 class="mood-btns-title" style="line-height: 13px;">MUSIC VOLUME</h4>
+                    <i class="bi bi-volume-down"></i>
+                    <div id="volume"></div>
+                    <i class="bi bi-volume-up"></i>
+                </div>
+                <div class="video-selector">
+                    <label class="video-label" for="videoSelect">BACKGROUND :</label>
+                    <select id="videoSelect" onchange="changeBackgroundVideo()">
+                        <option value="1.mp4">Video 1</option>
+                        <option value="2.mp4">Video 2</option>
+                        <option value="3.mp4">Video 3</option>
+                        <option value="4.mp4">Video 4</option>
+                        <option value="5.mp4">Video 5</option>
+                        <option value="6.mp4">Video 6</option>
+                    </select>
+                </div>
+                <div class="effect-container">
+                    <!-- Cet élément contiendra les contrôles d'effets générés dynamiquement -->
+                </div>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <video id="lofiVideo" autoplay loop muted>
+                <source id="videoSource" src="1.mp4" type="video/mp4" />
+            </video>
+            <button id="toggleSidebarButton" onclick="showSidebar()" class="sidebar-toggle-button">
+                <i class="bi bi-layout-sidebar"></i>
+            </button>
+            <div id="musicInfo" class="music-info"></div>
+        </div>
+
+    </div>
+    <!-- Add your JavaScript code here -->
+    <script src="script.js"></script>
+    <script src="background.js"></script>
+    <script src="sidebar.js"></script>
+    <script src="effects.js"></script>
+</body>
+
+</html>
