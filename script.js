@@ -10,37 +10,33 @@ const skipButton = document.getElementById('skipButton');
 const volumeSlider = document.getElementById('volumeSlider');
 const musicInfo = document.getElementById('musicInfo');
 
-
 function retreivemusicfiles() {
     const musicList = [];
 
-    fetch('music/')
-        .then((response) => response.text())
-        .then((html) => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const links = doc.querySelectorAll('a');
-
-            links.forEach((link) => {
-                const href = link.getAttribute('href');
-                if (href.endsWith('.mp3')) {
-                    musicList.push(href); // Use the href as the music file path
+    fetch('https://api.github.com/repos/lucaswisman/lucaswisman.github.io/contents/music')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                if (item.type === 'file' && item.name.endsWith('.mp3')) {
+                    const musicPath = item.download_url;
+                    musicList.push(musicPath);
                 }
             });
 
-            console.log(musicList); // Check if the music files are correctly retrieved
+            console.log(musicList); // Vérifiez si les fichiers de musique sont correctement récupérés
 
-            // Play the first music file by default
+            // Jouez le premier fichier de musique par défaut
             if (musicList.length > 0) {
-                audioPlayer.src = musicList[0]; // Update the path to include the 'music/' directory
+                audioPlayer.src = musicList[0]; // Mettez à jour le chemin pour inclure le dossier 'music'
                 //audioPlayer.play();
                 musicFiles = musicList;
             }
         })
-        .catch((error) => {
-            console.log('Error retrieving music files:', error);
+        .catch(error => {
+            console.log('Erreur lors de la récupération des fichiers de musique :', error);
         });
 }
+
 
 function playMusic() {
     if (musicFiles.length === 0) return;

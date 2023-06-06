@@ -1,6 +1,7 @@
 const effectFolder = 'effects/';
 let effectPlayers = [];
 let effectFiles = [];
+
 function retrieveEffectFiles() {
     const effectList = [];
 
