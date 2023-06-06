@@ -1,4 +1,4 @@
-const musicFolder = 'music/';
+const musicFolder = '.music/';
 let musicFiles = [];
 let currentTrackIndex = 0;
 let isPlaying = false;
