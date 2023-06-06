@@ -1,41 +1,38 @@
 const effectFolder = 'effects/';
 let effectPlayers = [];
 let effectFiles = [];
-
 function retrieveEffectFiles() {
     const effectList = [];
 
-    fetch('effects/')
-        .then((response) => response.text())
-        .then((html) => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const links = doc.querySelectorAll('a');
-
-            links.forEach((link) => {
-                const href = link.getAttribute('href');
-                if (href.endsWith('.mp3')) {
-                    effectList.push(href);
+    fetch('https://api.github.com/repos/lucaswisman/effects/contents/')
+        .then((response) => response.json())
+        .then((data) => {
+            data.forEach((item) => {
+                const name = item.name;
+                if (name.endsWith('.mp3')) {
+                    const effectPath = `https://lucaswisman.github.io/effects/${name}`;
+                    effectList.push(effectPath);
                 }
             });
 
-            console.log(effectList); // Check if the effect files are correctly retrieved
+            console.log(effectList); // Vérifiez si les fichiers d'effet sont correctement récupérés
 
-            // Create instances of Audio for each effect file
+            // Créez des instances de Audio pour chaque fichier d'effet
             effectList.forEach((effectPath) => {
                 const effectPlayer = new Audio();
                 effectPlayer.src = effectPath;
-                effectPlayer.loop = true; // Set loop to true
+                effectPlayer.loop = true; // Définissez loop sur true
                 effectPlayers.push(effectPlayer);
             });
 
             effectFiles = effectList;
-            createEffectControls(); // Create effect controls after retrieving the files
+            createEffectControls(); // Créez les contrôles d'effet après avoir récupéré les fichiers
         })
         .catch((error) => {
-            console.log('Error retrieving effect files:', error);
+            console.log('Erreur lors de la récupération des fichiers d\'effet :', error);
         });
 }
+
 
 function setEffectVolume(effectIndex, volume) {
     if (effectIndex >= 0 && effectIndex < effectPlayers.length) {
@@ -48,7 +45,7 @@ function playEffect(effectIndex) {
     if (effectIndex >= 0 && effectIndex < effectPlayers.length) {
         const effectPlayer = effectPlayers[effectIndex];
         effectPlayer.play();
-        setEffectVolume(effectIndex,0.1)
+        setEffectVolume(effectIndex, 0.1)
     }
 }
 
@@ -63,9 +60,9 @@ function createEffectControls() {
 
     effectFiles.forEach((effectPath, index) => {
         const effectName = effectPath
-        .substring(effectPath.lastIndexOf('/') + 1, effectPath.lastIndexOf('.'))
-        .replace('_', ' ')
-        .replace(/^(.)(.*)$/, (_, firstChar, rest) => firstChar.toUpperCase() + rest);
+            .substring(effectPath.lastIndexOf('/') + 1, effectPath.lastIndexOf('.'))
+            .replace('_', ' ')
+            .replace(/^(.)(.*)$/, (_, firstChar, rest) => firstChar.toUpperCase() + rest);
         const effectElement = document.createElement('div');
         effectElement.classList.add('effect-item');
 
