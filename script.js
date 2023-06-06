@@ -120,3 +120,40 @@ function displayMusicInfo() {
 
 retreivemusicfiles();
 changeVolume();
+
+window.addEventListener('DOMContentLoaded', function () {
+    var textarea = document.getElementById('texte-sauvegarde');
+
+    // Vérifie s'il y a une sauvegarde précédente et l'affiche
+    if (localStorage.getItem('sauvegardeTexte')) {
+        textarea.value = localStorage.getItem('sauvegardeTexte');
+    }
+
+    // Sauvegarde automatiquement le texte lorsqu'il y a un changement
+    textarea.addEventListener('input', function () {
+        localStorage.setItem('sauvegardeTexte', textarea.value);
+    });
+
+    // Ajoute la mise en forme automatique avec indentation
+    textarea.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            var start = textarea.selectionStart;
+            var end = textarea.selectionEnd;
+            var text = textarea.value;
+            var line = text.substring(0, start).split('\n').pop();
+
+            if (line.startsWith('- ')) {
+                e.preventDefault();
+                var indent = '';
+                var match = line.match(/^\s+/);
+                if (match && match.length > 0) {
+                    indent = match[0];
+                }
+                var newText = text.substring(0, start) + '\n' + indent + '- ' + text.substring(end);
+                textarea.value = newText;
+                textarea.selectionStart = start + indent.length + 2;
+                textarea.selectionEnd = start + indent.length + 2;
+            }
+        }
+    });
+});

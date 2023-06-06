@@ -299,14 +299,14 @@
 
 .effect-container {
     width: 90%;
-    
+
 }
 
 .effect-slider-container {
     width: 90%;
     margin-left: 5%;
-    
-    
+
+
 }
 
 .effect-item {
@@ -321,7 +321,7 @@
     font-size: 13px;
     margin-top: 20px;
     margin-bottom: 10px;
-    
+
 }
 
 .ui-slider-range.ui-corner-all.ui-widget-header.ui-slider-range-min {
@@ -329,17 +329,17 @@
     background-color: #f3a953;
     border-radius: 15px;
     /* Autres styles personnalisés */
-  }
-  
-  .volume.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content {
+}
+
+.volume.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content {
     /* Ajoutez ici les styles personnalisés pour le volume */
     border-radius: 15px;
     background-color: #29374446;
 
     /* Autres styles personnalisés */
-  }
-  
-  .ui-slider-handle.ui-corner-all.ui-state-default {
+}
+
+.ui-slider-handle.ui-corner-all.ui-state-default {
     width: 18px;
     height: 18px;
     background: #f3a953;
@@ -349,5 +349,9 @@
     position: absolute;
     margin: 0px 0 0 -9px;
     cursor: pointer;
-  }
-  
+}
+
+textarea {
+    width: 400px;
+    height: 200px;
+}
