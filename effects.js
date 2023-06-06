@@ -4,7 +4,7 @@ let effectFiles = [];
 function retrieveEffectFiles() {
     const effectList = [];
 
-    fetch('https://api.github.com/repos/lucaswisman/lucaswisman.github.io/git/trees/test/effects/contents/')
+    fetch('https://api.github.com/repos/lucaswisman/lucaswisman.github.io/contents/effects')
         .then((response) => response.json())
         .then((data) => {
             data.forEach((item) => {
