@@ -5,7 +5,7 @@ let effectFiles = [];
 function retrieveEffectFiles() {
     const effectList = [];
 
-    fetch('./effects/')
+    fetch('effects/')
         .then((response) => response.text())
         .then((html) => {
             const parser = new DOMParser();
